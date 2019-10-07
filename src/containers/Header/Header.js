@@ -35,6 +35,7 @@ const Header = props => {
   };
 
   const LoginClick = async response => {
+    console.log(response);
     const token = await signUpBinder(
       response.profileObj.name,
       response.profileObj.imageUrl,
