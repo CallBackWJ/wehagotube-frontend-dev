@@ -32,7 +32,7 @@ const SearchBar = props => {
         <Option value="title">제목 </Option>
         <Option value="desc">내용</Option>
       </Select>
-      <HeaderSearch onClick={handleClick} />
+      <HeaderSearch onClick={handleClick}  keyword={props.keyword}/>
     </Root>
   );
 };

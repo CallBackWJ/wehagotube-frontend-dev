@@ -52,7 +52,7 @@ const Finder = props => {
   return (
     <Layout>
       <Menu data={props.menu} onClick={menuClick} />
-      <SearchBar onClick={search} type={props.type} />
+      <SearchBar onClick={search} type={props.type} keyword={props.keyword}/>
       {items||"검색 결과가 없습니다."}
     </Layout>
   );

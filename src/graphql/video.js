@@ -51,3 +51,31 @@ export const STREAMING = gql`
 }
 
 `;
+
+
+export const PAST_VIDEO = gql`
+  {
+    pastVideo {
+      viewCount
+      createdAt
+      thumbnail
+      schedule {
+        id
+        title
+        desc
+      }
+    }
+  }
+`;
+
+
+export const LIVE_VIDEO = gql`
+  {
+    liveVideo {
+      schedule {
+        id
+        status
+      }
+    }
+  }
+`;

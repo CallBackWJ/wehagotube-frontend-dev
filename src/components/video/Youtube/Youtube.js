@@ -8,7 +8,7 @@ import { useQuery } from "react-apollo-hooks";
 const GuideMessage = styled.div`
   width: ${props => props.width+"px"};
   height: ${props => props.height+"px"};
-  background: rgb(240,240,240);
+  background: rgb(220,220,220);
   display:flex;
   justify-content: center;
   align-items: center;
@@ -44,7 +44,7 @@ const Youtube = props => {
     variables: { schedule_id: props.id }
   });
 
-  if (loading) return "loading"
+  if (loading) return <GuideMessage width={props.width} height={props.height}></GuideMessage>
   if (error) return "error";
   const status=(data.video)?data.video.schedule.status:"RESERVED";
   const videoId=(data.video)?data.video.youtubeId:"Z9_-4d3LDw0";

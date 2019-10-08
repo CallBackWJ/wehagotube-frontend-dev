@@ -77,7 +77,7 @@ const Item = props => {
   if (!props.videoId)
     return (
       <Card>
-        <ScheduleDate>일정 없음</ScheduleDate>
+        <ScheduleDate>{props.title}</ScheduleDate>
         <Descript>
           <MainTitle />
           <SubTitle />

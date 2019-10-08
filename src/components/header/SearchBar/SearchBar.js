@@ -30,7 +30,7 @@ const Button = styled.div`
   }
 `;
 const SearchBar = props => {
-  const keyword = useInput("");
+  const keyword = useInput(props.keyword==="NONE"?"":props.keyword);
 
   const handleKeyPress = e => {
     if (e.key === "Enter") {

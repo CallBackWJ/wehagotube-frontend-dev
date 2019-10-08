@@ -6,7 +6,23 @@ import { useQuery } from "react-apollo-hooks";
 import { LATEST_SCHEDULE_LIST } from "../../graphql/schedule";
 const MainSchedule = props => {
     const { data, error, loading } = useQuery(LATEST_SCHEDULE_LIST);
-    if (loading) return "loading";
+    let empty=[];
+    for(let i=0;i<5;i++){
+      empty.push( <Item
+        key={i}
+        videoId=""
+        title=""
+        description=""
+        scheduledStartTime=""
+        scheduledEndTime=""
+      />)
+    }
+
+    if (loading) return (
+      <Layout>
+          {empty}
+      </Layout>
+  );
     if (error) return "error";
     const items = data.latestScheduleList.map(item => (
         <Item
@@ -24,7 +40,7 @@ const MainSchedule = props => {
           <Item
             key={items.length}
             videoId=""
-            title=""
+            title="일정 없음"
             description=""
             scheduledStartTime=""
             scheduledEndTime=""

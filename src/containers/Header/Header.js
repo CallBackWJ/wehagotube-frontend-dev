@@ -65,7 +65,7 @@ const Header = props => {
           manage={ManageClick}
         />
       )}
-      <SearchBar onClick={SearchClick} placeholder="검색어를 입력해주세요" />
+      <SearchBar onClick={SearchClick} placeholder="검색어를 입력해주세요" keyword={props.keyword}/>
     </Layout>
   );
 };
