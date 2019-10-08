@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 const Root = styled.div`
   display: flex;
-  height: 100%;
+  height: 3rem;
   justify-content: space-between;
   align-items: center;
   background: rgb(0, 144, 245);

@@ -7,6 +7,7 @@ const Card = styled.div`
   height: 10rem;
   display: flex;
   flex-direction: column;
+
 `;
 
 const ScheduleDate = styled.div`
@@ -84,14 +85,16 @@ const Item = props => {
         </Descript>
       </Card>
     );
-  const schedule = dateFormat(props.scheduledStartTime);
+  const start = dateFormat(props.scheduledStartTime);
+  const end=dateFormat(props.scheduledEndTime);
+
   return (
     <Card>
-      <ScheduleDate>{schedule.printDate()}</ScheduleDate>
+      <ScheduleDate>{start.printDate()}</ScheduleDate>
       <Descript>
         <MainTitle>{props.title}</MainTitle>
         <SubTitle>{props.description}</SubTitle>
-        <ScheduleTime>{schedule.printTime()}</ScheduleTime>
+        <ScheduleTime>{start.printTime()+" ~ "+end.printTime()}</ScheduleTime>
       </Descript>
     </Card>
   );

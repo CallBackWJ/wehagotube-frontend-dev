@@ -4,10 +4,9 @@ import Layout from "../../components/video/liveController/Layout";
 import Stepper from "../../components/video/liveController/Stepper";
 import Desc from "../../components/video/liveController/Desc";
 import Button from "../../components/video/liveController/Button";
-import { CREATE_VIDEO ,VIDEO,STREAMING} from "../../graphql/video";
-import { useQuery,useMutation } from "react-apollo-hooks";
+import { CREATE_VIDEO, VIDEO, STREAMING } from "../../graphql/video";
+import { useQuery, useMutation } from "react-apollo-hooks";
 import LinearProgress from "@material-ui/core/LinearProgress";
-
 
 const STEP = [
   { title: "예약", desc: "스트림을 생성하시겠습니까? " },
@@ -19,66 +18,87 @@ const STEP = [
 
 const STATUS = ["RESERVED", "READY", "LIVE", "COMPLETED", "PUBLISHED"];
 
-
-
 const LiveController = props => {
-
+  const [test,setTest]=React.useState(false);
   const [streaming] = useMutation(STREAMING);
-  const streamingBinder = (schedule_id,youtube_id,status) =>
-  streaming({
+  const streamingBinder = (schedule_id, youtube_id, status) =>
+    streaming({
       variables: {
-        schedule_id:schedule_id,
+        schedule_id: schedule_id,
         youtube_id: youtube_id,
-        status:status
+        status: status
       }
     });
 
-
   const [createVideo] = useMutation(CREATE_VIDEO);
-  const createVideoBinder = (schedule_id) =>
-  createVideo({
+  const createVideoBinder = schedule_id =>
+    createVideo({
       variables: {
         schedule_id: schedule_id
       }
     });
 
-    const { data, error, loading ,refetch} = useQuery(VIDEO, {
-      variables: { schedule_id: props.id }
-    });
+  const { data, error, loading, refetch } = useQuery(VIDEO, {
+    variables: { schedule_id: props.id }
+  });
 
   if (loading) return <LinearProgress variant="query" />;
   if (error) return "error";
 
+  const HANDLER = [
+    async () => {
+      const result = await createVideoBinder(props.id);
+      console.log("createVideoBinder::", result);
+      await refetch();
+    },
+    async () => {
+      const result = await streamingBinder(
+        props.id,
+        data.video.youtubeId,
+        "LIVE"
+      );
+      if (result) await refetch();
+    },
+    async () => {
+      const result = await streamingBinder(
+        props.id,
+        data.video.youtubeId,
+        "COMPLETED"
+      );
+      if (result) await refetch();
+    },
+    async () => {
+      const result = await streamingBinder(
+        props.id,
+        data.video.youtubeId,
+        "PUBLISHED"
+      );
+      if (result) await refetch();
+    },
+    async () => {
+      const result = await streamingBinder(
+        props.id,
+        data.video.youtubeId,
+        "UNPUBLISHED"
+      );
+      if (result) await refetch();
+    },
+    async () => {
+      const result = await streamingBinder(
+        props.id,
+        data.video.youtubeId,
+        "TEST"
+      );
+      if (result) await setTest(true);
+    }
+  ];
 
-  const HANDLER = [async() => {
-    const result=await createVideoBinder(props.id)
-    console.log("createVideoBinder::",result)
-    await refetch()
-  }, async() => {
-    const result=await streamingBinder(props.id,data.video.youtubeId,"LIVE")
-    if(result) await refetch();
-  
-  }, async() => {
-    const result=await streamingBinder(props.id,data.video.youtubeId,"COMPLETED")
-    if(result) await refetch();
-  }, async() => {
-    const result=await streamingBinder(props.id,data.video.youtubeId,"PUBLISHED")
-    if(result) await refetch();
-  },  async() => {
-    const result=await streamingBinder(props.id,data.video.youtubeId,"UNPUBLISHED")
-    if(result) await refetch();
-  }];
-
-  const status=(data.video)?data.video.schedule.status:"RESERVED";
+  const status = data.video ? data.video.schedule.status : "RESERVED";
   return (
     <Layout>
       <Stepper steps={STEP} state={STATUS.indexOf(status)} />
       <Desc steps={STEP} state={STATUS.indexOf(status)} />
-      <Button
-        steps={STEP}
-        status={STATUS.indexOf(status)}
-        handler={HANDLER}
-      />
+      <Button steps={STEP} test={test} status={STATUS.indexOf(status)} handler={HANDLER} />
     </Layout>
   );
 };

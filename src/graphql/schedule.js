@@ -43,14 +43,15 @@ export const CREATE_SCHEDULE = gql`
   }
 `;
 
-
-export const SCHEDULE_LIST = gql`
+export const LATEST_SCHEDULE_LIST = gql`
   {
-    getVideoList(eventType: "upcoming", keyword: null) {
-      id
-      title
-      description
-      scheduledStartTime
+    latestScheduleList {
+    id
+    title
+    desc
+    status
+    startTime
+    endTime
     }
   }
 `;

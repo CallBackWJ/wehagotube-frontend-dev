@@ -31,19 +31,19 @@ const Back = styled.button`
   }
 `;
 const Button = props => {
-  // const nextClick = () => {
-  //   props.handler[props.status]();
-  // };
-  // const backClick = () => {
-  //   props.handler(props.status - 1);
-  // };
+
+
   return (
     <Root>
       {props.steps.length === props.status + 1 ? (
         <Back onClick={props.handler[props.status]}>배포중지</Back>
-      ) : null}
+      ) :  props.status===1?(
+        <Back onClick={props.handler[5]}
+        disabled={props.test}
+        >테스트</Back>
+      ):null}
       <Next
-        disabled={props.steps.length === props.status + 1}
+        disabled={props.steps.length === props.status + 1 || (props.status===1&&props.test===false)}
         onClick={ props.handler[props.status]}
       >
         {props.steps.length === props.status + 1

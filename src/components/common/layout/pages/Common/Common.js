@@ -13,9 +13,7 @@ const Header = styled.div`
 const Contents = styled.div`
   flex: 1;
   display: flex;
-  margin-left: auto;
-  margin-right: auto;
-
+  flex-direction: column;
 `;
 
 const Common = props => {
