@@ -6,6 +6,7 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   background: #3399ff33;
+ //background:#DADAD;
 `;
 const Menu = styled.div`
   display: flex;

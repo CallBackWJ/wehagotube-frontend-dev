@@ -40,7 +40,7 @@ const Finder = props => {
       desc={item.desc}
       status={item.status}
       time={moment(item.startTime)
-        .format("예약일: YYYY-MM-DD 시간:HH:mm")
+        .format("예약일: YYYY년 MM월 DD일 HH시 mm분")
         .toString()}
       hour={moment
         .duration(moment(item.endTime).diff(moment(item.startTime)))

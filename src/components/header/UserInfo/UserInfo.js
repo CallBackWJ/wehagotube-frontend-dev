@@ -57,7 +57,7 @@ const UserInfo = props => {
     setAnchorEl(null);
   };
   
-  
+  console.log(props.me);
   return (
     <div>
       {props.me ? (

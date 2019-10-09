@@ -90,6 +90,14 @@ const LiveController = props => {
         "TEST"
       );
       if (result) await setTest(true);
+    },
+    async () => {
+      const result = await streamingBinder(
+        props.id,
+        data.video.youtubeId,
+        "DELETE"
+      );
+      if (result) await refetch();
     }
   ];
 

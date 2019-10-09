@@ -47,6 +47,7 @@ const SearchBar = props => {
         value={keyword.value}
         onChange={keyword.onChange}
         onKeyPress={handleKeyPress}
+        
       />
       <Button>
         <MdSearch size="1.5rem" onClick={handleClick} />
