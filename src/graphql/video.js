@@ -79,3 +79,28 @@ export const LIVE_VIDEO = gql`
     }
   }
 `;
+
+export const SEARCH_VIDEO = gql`
+   query searchVideo($keyword: String!) {
+    searchVideo(keyword: $keyword) {
+      id
+      youtubeId
+      viewCount
+      createdAt
+      thumbnail
+      timeLinks {
+        id
+        seek
+        desc
+      }
+      schedule {
+        id
+        title
+        desc
+        status
+        startTime
+        endTime
+      }
+    }
+  }
+`;

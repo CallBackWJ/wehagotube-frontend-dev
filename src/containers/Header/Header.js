@@ -28,7 +28,7 @@ const Header = props => {
     props.history.push("/");
   };
   const SearchClick = keyword => {
-    props.history.push(`/search/${keyword}`);
+    props.history.push(`/search/${keyword||"NONE"}`);
   };
   const ManageClick = () => {
     props.history.push(`/manage/schedule/all/NONE/NONE`);
