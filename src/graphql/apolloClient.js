@@ -5,8 +5,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 
 const client = new ApolloClient({
   link: createUploadLink({
-   // uri: 'https://wehagotube-backend-dev.herokuapp.com/', 
-   uri: 'http://localhost:4000/',
+    uri: 'https://wehagotube-backend-dev.herokuapp.com/', 
+   //uri: 'http://localhost:4000/',
     headers: {
       Authorization: `Bearer ${window.sessionStorage.getItem("token")}`
     }
