@@ -4,7 +4,6 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import styled from "styled-components";
-
 const Root = styled.div`
  width:100%;
  height:100%;
@@ -14,7 +13,7 @@ const Root = styled.div`
 const localizer = momentLocalizer(moment);
 const formats = {
   monthHeaderFormat: "YYYY년 MM월",
-  dayHeaderFormat: "MM월 DD일"
+  dayHeaderFormat: "MM월 DD일",
 };
 
 const ScheduleCalendar = props => {
@@ -58,14 +57,15 @@ const ScheduleCalendar = props => {
         scrollToTime={new Date(2019, 1, 1, 6)}
         defaultDate={moment().toDate()}
         localizer={localizer}
-        onSelectEvent={event => alert(event.title)}
-        onSelectSlot={props.handleSelectSlot}
+        onSelectEvent={props.onSelectEvent}
+        onSelectSlot={props.onSelectSlot}
         dayPropGetter={customDayPropGetter}
         components={{
           //event: Event,
           agenda: {
             event: EventAgenda
           }
+        
         }}
       />
     </Root>

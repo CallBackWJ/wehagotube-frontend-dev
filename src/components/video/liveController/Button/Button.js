@@ -39,7 +39,7 @@ const Button = props => {
         <Back onClick={props.handler[5]} disabled={props.test}>
           테스트
         </Back>
-      ) : props.status === 3 ? (
+      ) : (props.status === 3||props.status === 1) ? (
         <Back onClick={props.handler[6]}>
           삭제
         </Back>

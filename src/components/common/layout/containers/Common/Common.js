@@ -11,8 +11,8 @@ const Root = styled.div`
 `;
 
 const Component = styled.div`
-  min-width: 70rem;
-  max-width: 70rem;
+  min-width: 65rem;
+  max-width: 65rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;

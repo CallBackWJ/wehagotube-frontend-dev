@@ -7,11 +7,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import styled from "styled-components";
-
 const DateRange = styled.div``;
 
 const CreateDialog = props => {
   
+
+
   return (
     <Dialog
       open={props.open}
@@ -29,6 +30,7 @@ const CreateDialog = props => {
           id="name"
           label="제목"
           value={props.title.value}
+       
           onChange={props.title.onChange}
           variant="outlined"
           fullWidth

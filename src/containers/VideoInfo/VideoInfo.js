@@ -8,6 +8,7 @@ import StatusBar from "../../components/video/videoInfo/StatusBar";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { SCHEDULE } from "../../graphql/schedule";
 import { useQuery } from "react-apollo-hooks";
+
 const VideoInfo = props => {
   const { data, error, loading } = useQuery(SCHEDULE, {
     variables: { id: props.id }
