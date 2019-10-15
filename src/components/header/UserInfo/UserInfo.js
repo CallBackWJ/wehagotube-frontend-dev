@@ -112,7 +112,7 @@ const UserInfo = props => {
           )}
           onSuccess={props.login}
           onFailure={props.login}
-          scope="profile"
+          scope="profile email https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl"
         />
       )}
     </div>
