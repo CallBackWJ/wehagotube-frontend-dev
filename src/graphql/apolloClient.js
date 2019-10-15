@@ -4,7 +4,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from 'apollo-utilities';
 const wsLink = new WebSocketLink({
-  uri: 'ws://wehagotube-backend-dev.herokuapp.com/',
+  uri: 'wss://wehagotube-backend-dev.herokuapp.com/',
   //uri: "ws://localhost:4000/",
   options: {
     reconnect: true
