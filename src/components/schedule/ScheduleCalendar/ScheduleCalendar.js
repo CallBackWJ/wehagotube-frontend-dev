@@ -10,6 +10,10 @@ const Root = styled.div`
  padding:1rem;
 
 `;
+moment.lang('ko', {
+  weekdays: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
+  weekdaysShort: ["일","월","화","수","목","금","토"],
+});
 const localizer = momentLocalizer(moment);
 const formats = {
   monthHeaderFormat: "YYYY년 MM월",
@@ -18,7 +22,7 @@ const formats = {
 
 const ScheduleCalendar = props => {
 
-  
+
   const Event = ({ event }) => (
     <span style={{}}>
       <strong>{event.title}</strong>
