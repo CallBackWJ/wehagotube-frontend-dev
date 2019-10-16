@@ -65,6 +65,8 @@ const CreateDialog = props => {
   };
 
   React.useEffect(() => {
+    desc.setValue("");
+    title.setValue("");
     start.setValue(moment(props.data.start).format());
     end.setValue(moment(props.data.end).format());
   }, [props.data]);
