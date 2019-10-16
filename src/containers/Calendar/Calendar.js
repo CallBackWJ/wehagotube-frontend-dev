@@ -72,8 +72,6 @@ const Calendar = props => {
   const isWeekend = date => date.getDay() === 0 || date.getDay() === 6;
   const diffDate = (start, end) =>new Date(end).getDate() - new Date(start).getDate();
 
-
-  
   const handleSave = async (title, desc,start, end) => {
     setCreateOpen(false);
     for (let i = 0, weekendCount = 0; i <= diffDate(start, end); i++) {

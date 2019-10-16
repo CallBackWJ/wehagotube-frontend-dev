@@ -2,12 +2,37 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Card = styled.div`
+const Root = styled.div`
   width: 12rem;
   height: 10rem;
+  box-shadow: 0 2px 3px rgba(0, 10, 18, 0.2);
+
+  .front {
+    display: flex;
+  }
+  .back {
+    display: none;
+    background: #444444;
+    color: white;
+ 
+  }
+  &:hover {
+    .front {
+      display: none;
+    }
+    .back {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow:auto;
+    }
+  }
+`;
+const Card = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-
 `;
 
 const ScheduleDate = styled.div`
@@ -76,27 +101,34 @@ const dateFormat = UTC => {
 const Item = props => {
   if (!props.videoId)
     return (
-      <Card>
-        <ScheduleDate>{props.title}</ScheduleDate>
-        <Descript>
-          <MainTitle />
-          <SubTitle />
-          <ScheduleTime />
-        </Descript>
-      </Card>
+      <Root>
+        <Card>
+          <ScheduleDate>{props.title}</ScheduleDate>
+          <Descript>
+            <MainTitle />
+            <SubTitle />
+            <ScheduleTime />
+          </Descript>
+        </Card>
+      </Root>
     );
   const start = dateFormat(props.scheduledStartTime);
-  const end=dateFormat(props.scheduledEndTime);
+  const end = dateFormat(props.scheduledEndTime);
 
   return (
-    <Card>
-      <ScheduleDate>{start.printDate()}</ScheduleDate>
-      <Descript>
-        <MainTitle>{props.title}</MainTitle>
-        <SubTitle>{props.description}</SubTitle>
-        <ScheduleTime>{start.printTime()+" ~ "+end.printTime()}</ScheduleTime>
-      </Descript>
-    </Card>
+    <Root>
+      <Card className="front">
+        <ScheduleDate>{start.printDate()}</ScheduleDate>
+        <Descript>
+          <MainTitle>{props.title}</MainTitle>
+          <SubTitle>{props.description}</SubTitle>
+          <ScheduleTime>
+            {start.printTime() + " ~ " + end.printTime()}
+          </ScheduleTime>
+        </Descript>
+      </Card>
+      <Card className="back">{props.description}</Card>
+    </Root>
   );
 };
 

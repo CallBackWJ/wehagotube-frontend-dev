@@ -48,8 +48,8 @@ export const CREATE_SCHEDULE = gql`
 `;
 
 export const LATEST_SCHEDULE_LIST = gql`
-  {
-    latestScheduleList {
+   query latestScheduleList($page: Int!){
+    latestScheduleList(page:$page) {
       id
       title
       desc
@@ -59,7 +59,6 @@ export const LATEST_SCHEDULE_LIST = gql`
     }
   }
 `;
-
 export const UPDATE_SCHEDULE = gql`
   mutation updateSchedule(
     $id: String!
