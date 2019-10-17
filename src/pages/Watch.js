@@ -7,6 +7,7 @@ import Youtube from "../components/video/Youtube";
 import Info from "../containers/VideoInfo";
 import Box from "../components/ChatAndLinkBox";
 import TimeLink from "../containers/TimeLinkManage";
+import LiveChat from "../components/video/LiveChat"
 
 const WatchPage = ({ match }) => {
   const { id } = match.params;
@@ -17,7 +18,7 @@ const WatchPage = ({ match }) => {
         <Youtube id={id} width="900" height="450" />
         <Info id={id} />
         <Box title={["실시간 채팅", "타임 링크"]}>
-
+          <LiveChat id={id} />
           <TimeLink id={id} />
         </Box>
       </PageLayout>
