@@ -11,6 +11,7 @@ const Root = styled.div`
 const List = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom:-3rem;
 `;
 const Controller = styled.div`
   display: flex;
@@ -20,12 +21,12 @@ const Controller = styled.div`
 const Next = styled.div`
   position: relative;
   left: 3rem;
-  top: -6rem;
+  top: -3rem;
 `;
 const Prev = styled.div`
   position: relative;
   left: -62rem;
-  top: -6rem;
+  top: -3rem;
 `;
 const Layout = props => {
   return (

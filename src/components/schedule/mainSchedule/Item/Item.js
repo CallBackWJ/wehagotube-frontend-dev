@@ -33,6 +33,7 @@ const Card = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+
 `;
 
 const ScheduleDate = styled.div`

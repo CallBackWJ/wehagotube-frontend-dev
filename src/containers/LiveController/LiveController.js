@@ -20,6 +20,7 @@ const STATUS = ["RESERVED", "READY", "LIVE", "COMPLETED", "PUBLISHED"];
 
 const LiveController = props => {
   const [test,setTest]=React.useState(false);
+  
   const [streaming] = useMutation(STREAMING);
   const streamingBinder = (schedule_id, youtube_id, status) =>
     streaming({
