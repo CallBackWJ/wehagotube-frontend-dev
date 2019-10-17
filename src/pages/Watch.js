@@ -20,7 +20,7 @@ const WatchPage = ({ match }) => {
           <iframe
             allowfullscreen=""
             frameborder="0"
-            height="270"
+            height="600"
             src="https://www.youtube.com/live_chat?v=FITIjng4RDg&embed_domain=wehagotube-frontend-dev.netlify.com"
             width="480"
           ></iframe>
