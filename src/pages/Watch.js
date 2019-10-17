@@ -17,13 +17,6 @@ const WatchPage = ({ match }) => {
         <Youtube id={id} width="900" height="450" />
         <Info id={id} />
         <Box title={["실시간 채팅", "타임 링크"]}>
-          <iframe
-            allowfullscreen=""
-            frameborder="0"
-            height="640"
-            src="https://www.youtube.com/live_chat?v=FITIjng4RDg&embed_domain=wehagotube-frontend-dev.netlify.com"
-            width="480"
-          ></iframe>
 
           <TimeLink id={id} />
         </Box>
