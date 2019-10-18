@@ -16,9 +16,9 @@ const LiveChat = props => {
         <iframe
         allowfullscreen=""
         frameborder="0"
-        height="620"
+        height="100%"
         src={src}
-        width="480"
+        width="100%"
       ></iframe>
     );
 };
