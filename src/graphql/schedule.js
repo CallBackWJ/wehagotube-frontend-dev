@@ -22,6 +22,9 @@ export const SCHEDULE = gql`
       startTime
       endTime
     }
+    video(schedule_id: $id) {
+      viewCount
+    }
   }
 `;
 export const CREATE_SCHEDULE = gql`
@@ -48,8 +51,8 @@ export const CREATE_SCHEDULE = gql`
 `;
 
 export const LATEST_SCHEDULE_LIST = gql`
-   query latestScheduleList($page: Int!){
-    latestScheduleList(page:$page) {
+  query latestScheduleList($page: Int!) {
+    latestScheduleList(page: $page) {
       id
       title
       desc
@@ -79,7 +82,7 @@ export const UPDATE_SCHEDULE = gql`
   }
 `;
 export const PUBSUB_SCHEDULE = gql`
-  subscription  {
+  subscription {
     pubsubSchedule {
       id
       title

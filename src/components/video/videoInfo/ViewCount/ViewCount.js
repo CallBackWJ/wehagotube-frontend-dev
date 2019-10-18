@@ -14,6 +14,7 @@ const ViewCount = props => {
         "COMPLETED":()=>"방송이 종료되었습니다.",
         "PUBLISHED":(v)=>`조회수: ${v}`
       }
+      console.log(props)
     return (
         <Root>
                  {STATUS[props.status](props.count)}

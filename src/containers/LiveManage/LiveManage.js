@@ -6,6 +6,7 @@ import Controller from '../LiveController'
 import Info from "../VideoInfo"
 import TimeLink from '../TimeLinkManage'
 import Box from '../../components/ChatAndLinkBox'
+import LiveChat from '../../components/video/LiveChat'
 const LiveManage = props => {
     return (
         <Layout>
@@ -13,7 +14,7 @@ const LiveManage = props => {
            <Youtube id={props.id} width="534" height="300" />
            <Info id={props.id}/>
            <Box title={["실시간 채팅","타임 링크"]}>
-            채팅
+            <LiveChat id={props.id}/>
             <TimeLink id={props.id}/>
            </Box>
         </Layout>

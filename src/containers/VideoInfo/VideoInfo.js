@@ -16,6 +16,7 @@ const VideoInfo = props => {
   if (loading) return <LinearProgress variant="query" />;
   if (error) return "error";
 
+  const count=data.video&&data.video.viewCount;
   return (
     <Layout>
       <StatusBar status={data.schedule.status} />
@@ -23,7 +24,7 @@ const VideoInfo = props => {
       <Desc>{data.schedule.desc}</Desc>
       <ViewCount
         status={data.schedule.status}
-        count={data.schedule.viewCount}
+        count={count}
       />
     </Layout>
   );
