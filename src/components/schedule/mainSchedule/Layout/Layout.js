@@ -20,12 +20,12 @@ const Controller = styled.div`
 `;
 const Next = styled.div`
   position: relative;
-  left: 3rem;
+  left: 4rem;
   top: -3rem;
 `;
 const Prev = styled.div`
   position: relative;
-  left: -62rem;
+  left: -63rem;
   top: -3rem;
 `;
 const Layout = props => {
@@ -34,14 +34,13 @@ const Layout = props => {
       <List>{props.children}</List>
       <Controller>
         <Prev>
-          {" "}
-          <IconButton onClick={props.prev}>
+          <IconButton onClick={props.prev} disabled={props.page===0}>
             <MdKeyboardArrowLeft />
           </IconButton>
         </Prev>
         {/* {props.page} */}
         <Next>
-          <IconButton onClick={props.next}>
+          <IconButton onClick={props.next} disabled={!props.isMoreable} >
             <MdKeyboardArrowRight />
           </IconButton>
         </Next>

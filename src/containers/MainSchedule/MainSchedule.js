@@ -65,7 +65,7 @@ const MainSchedule = props => {
     }
   }
   
-  return <Layout prev={handlePrev} next={handleNext} page={page} >{items}</Layout>;
+  return <Layout prev={handlePrev} next={handleNext} page={page} isMoreable={data.latestScheduleList.length===5} >{items}</Layout>;
 };
 
 MainSchedule.propTypes = {};

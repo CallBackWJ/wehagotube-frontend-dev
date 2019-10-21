@@ -6,6 +6,7 @@ const Root = styled.div`
   width: 12rem;
   height: 10rem;
   box-shadow: 0 2px 3px rgba(0, 10, 18, 0.2);
+  background: rgb(238, 238, 238);
 
   .front {
     display: flex;
@@ -33,13 +34,15 @@ const Card = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-
+  border-radius:3px;
 `;
 
 const ScheduleDate = styled.div`
   flex: 0.25;
   height: 2rem;
   background: rgb(211, 210, 211);
+  border-top-left-radius:2px;
+  border-top-right-radius:2px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +51,6 @@ const ScheduleDate = styled.div`
 const Descript = styled.div`
   flex: 0.75;
   height: 8rem;
-  background: rgb(238, 238, 238);
   display: flex;
   flex-direction: column;
   justify-content: center;

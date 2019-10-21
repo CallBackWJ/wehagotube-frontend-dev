@@ -11,7 +11,7 @@ import {
 import CreateDialog from "../../components/schedule/CreateDialog";
 import UpdateDialog from "../../components/common/dialog/Schedule";
 import moment from "moment";
-
+import Loading from "../../components/common/Loading";
 const Calendar = props => {
   const [createOpen, setCreateOpen] = React.useState(false);
   const [updateOpen, setUpdateOpen] = React.useState(false);
@@ -57,7 +57,7 @@ const Calendar = props => {
     }
   });
 
-  if (loading) return <LinearProgress variant="query" />;
+  if (loading) return <Loading />;
   if (error) return "error";
 
   const items = data.schedules.map(item => ({
@@ -70,16 +70,22 @@ const Calendar = props => {
   }));
 
   const isWeekend = date => date.getDay() === 0 || date.getDay() === 6;
-  const diffDate = (start, end) =>new Date(end).getDate() - new Date(start).getDate();
+  const diffDate = (start, end) =>
+    new Date(end).getDate() - new Date(start).getDate();
 
-  const handleSave = async (title, desc,start, end) => {
+  const handleSave = async (title, desc, start, end) => {
     setCreateOpen(false);
     for (let i = 0, weekendCount = 0; i <= diffDate(start, end); i++) {
-      isWeekend(moment(start).add(i, "day").toDate()) 
-      ? 
-      weekendCount++
-      : await createScheduleBinder(
-        diffDate(start, end)?title + "[" + (i + 1 - weekendCount) + "]":title,
+      isWeekend(
+        moment(start)
+          .add(i, "day")
+          .toDate()
+      )
+        ? weekendCount++
+        : await createScheduleBinder(
+            diffDate(start, end)
+              ? title + "[" + (i + 1 - weekendCount) + "]"
+              : title,
             desc,
             moment(start)
               .add(i, "day")

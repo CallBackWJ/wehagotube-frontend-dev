@@ -54,8 +54,8 @@ export const STREAMING = gql`
 
 
 export const PAST_VIDEO = gql`
-  {
-    pastVideo {
+ query searchVideo($page: Int!){
+    pastVideo(page:$page){
       viewCount
       createdAt
       thumbnail

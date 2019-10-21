@@ -7,7 +7,7 @@ import Button from "../../components/video/liveController/Button";
 import { CREATE_VIDEO, VIDEO, STREAMING } from "../../graphql/video";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import LinearProgress from "@material-ui/core/LinearProgress";
-
+import Loading from "../../components/common/Loading"
 const STEP = [
   { title: "예약", desc: "스트림을 생성하시겠습니까? " },
   { title: "준비", desc: "방송을 시작하시겠습니까?" },
@@ -19,8 +19,9 @@ const STEP = [
 const STATUS = ["RESERVED", "READY", "LIVE", "COMPLETED", "PUBLISHED"];
 
 const LiveController = props => {
-  const [test,setTest]=React.useState(false);
-  
+  const [test, setTest] = React.useState(false);
+  const [UILoading, setUILoading] = React.useState(false);
+
   const [streaming] = useMutation(STREAMING);
   const streamingBinder = (schedule_id, youtube_id, status) =>
     streaming({
@@ -48,66 +49,88 @@ const LiveController = props => {
 
   const HANDLER = [
     async () => {
+      setUILoading(true);
       const result = await createVideoBinder(props.id);
-      console.log("createVideoBinder::", result);
       await refetch();
+      setUILoading(false);
     },
     async () => {
+      setUILoading(true);
       const result = await streamingBinder(
         props.id,
         data.video.youtubeId,
         "LIVE"
       );
       if (result) await refetch();
+      setUILoading(false);
     },
     async () => {
+      setUILoading(true);
       const result = await streamingBinder(
         props.id,
         data.video.youtubeId,
         "COMPLETED"
       );
       if (result) await refetch();
+      setUILoading(false);
     },
     async () => {
+      setUILoading(true);
       const result = await streamingBinder(
         props.id,
         data.video.youtubeId,
         "PUBLISHED"
       );
       if (result) await refetch();
+      setUILoading(false);
     },
     async () => {
+      setUILoading(true);
       const result = await streamingBinder(
         props.id,
         data.video.youtubeId,
         "UNPUBLISHED"
       );
       if (result) await refetch();
+      setUILoading(false);
     },
     async () => {
+      setUILoading(true);
       const result = await streamingBinder(
         props.id,
         data.video.youtubeId,
         "TEST"
       );
       if (result) await setTest(true);
+      setUILoading(false);
     },
     async () => {
+      setUILoading(true);
       const result = await streamingBinder(
         props.id,
         data.video.youtubeId,
         "DELETE"
       );
       if (result) await refetch();
+      setUILoading(false);
     }
   ];
 
   const status = data.video ? data.video.schedule.status : "RESERVED";
+  if (UILoading)
+    return (
+      <Loading/>
+    );
   return (
     <Layout>
       <Stepper steps={STEP} state={STATUS.indexOf(status)} />
       <Desc steps={STEP} state={STATUS.indexOf(status)} />
-      <Button steps={STEP} test={test} status={STATUS.indexOf(status)} handler={HANDLER} />
+      <Button
+        steps={STEP}
+        test={test}
+        status={STATUS.indexOf(status)}
+        handler={HANDLER}
+      />
     </Layout>
   );
 };

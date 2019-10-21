@@ -9,7 +9,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { SCHEDULES } from "../../graphql/schedule";
 import { useQuery } from "react-apollo-hooks";
 import moment from "moment";
-
+import Loading from "../../components/common/Loading"
 const Finder = props => {
 
   const search = ( type, keyword) => {
@@ -25,7 +25,7 @@ const Finder = props => {
     }
   );
 
-  if (loading) return <LinearProgress variant="query" />;
+  if (loading) return <Loading />;
   if (error) return "error";
 
   const handleItemClick=(id)=>{

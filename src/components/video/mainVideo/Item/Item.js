@@ -9,6 +9,13 @@ const Card = styled.div`
   margin-bottom: 1rem;
   display: flex;
   padding: 1rem;
+  border-radius:5px;
+  border:1px solid #F0F0F0;
+  box-shadow: 0 1px 2px rgba(0, 5, 9, 0.1);
+  &:hover{
+    border:1px solid rgb(0, 144, 245);
+  }
+  cursor:pointer;
 `;
 
 //동영상 이미지 부분
@@ -62,10 +69,9 @@ const Item = props => {
     props.history.push(`/watch/${props.id}`);
   };
   return (
-    <Card>
-      <Video onClick={handleClick}>
+    <Card onClick={handleClick}>
+      <Video >
         <Image src={props.thumbnail||"http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png"} />
-        <Badge></Badge>
       </Video>
       <Descript>
         <MainTitle>{props.title}</MainTitle>

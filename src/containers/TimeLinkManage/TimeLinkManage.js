@@ -53,7 +53,7 @@ const TimeLinkManage = props => {
     const sortdata = data.video.timeLinks.sort((a, b) =>
       a.seek < b.seek ? -1 : a.seek > b.seek ? 1 : 0
     );
-
+    console.log(data)
     items = sortdata.map(item => (
       <Item
         key={item.id}

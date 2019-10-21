@@ -8,11 +8,12 @@ const Root = styled.div`
  width:100%;
  height:100%;
  padding:1rem;
-
 `;
 moment.lang('ko', {
   weekdays: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
   weekdaysShort: ["일","월","화","수","목","금","토"],
+  months:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+  monthsShort:["1 /","2 /","3 /","4 /","5 /","6 /","7 /","8 /","9 /","10 /","11 /","12 /"],
 });
 const localizer = momentLocalizer(moment);
 const formats = {
@@ -24,7 +25,7 @@ const ScheduleCalendar = props => {
 
 
   const Event = ({ event }) => (
-    <span style={{}}>
+    <span style={{color:event.status==="RESERVED"?"white":"#BBBBBB"}}>
       <strong>{event.title}</strong>
       {event.desc && ":  " + event.desc}
     </span>
@@ -65,7 +66,7 @@ const ScheduleCalendar = props => {
         onSelectSlot={props.onSelectSlot}
         dayPropGetter={customDayPropGetter}
         components={{
-          //event: Event,
+          event: Event,
           agenda: {
             event: EventAgenda
           }
