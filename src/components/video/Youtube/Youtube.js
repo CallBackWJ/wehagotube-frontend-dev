@@ -40,7 +40,7 @@ const Youtube = props => {
     }
   };
 
-  const { data, error, loading ,refetch} = useQuery(VIDEO, {
+  const { data, error, loading} = useQuery(VIDEO, {
     variables: { schedule_id: props.id }
   });
 

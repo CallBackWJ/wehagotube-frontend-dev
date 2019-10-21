@@ -4,16 +4,16 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from 'apollo-utilities';
 const wsLink = new WebSocketLink({
-  uri: 'wss://wehagotube-backend-dev.herokuapp.com/',
-  //uri: "ws://localhost:4000/",
+  //uri: 'wss://wehagotube-backend-dev.herokuapp.com/',
+  uri: "ws://localhost:4000/",
   options: {
     reconnect: true
   }
 });
 
 const uploadLink = createUploadLink({
-  uri: 'https://wehagotube-backend-dev.herokuapp.com/',
-  //uri: "http://localhost:4000/",
+  //uri: 'https://wehagotube-backend-dev.herokuapp.com/',
+  uri: "http://localhost:4000/",
   headers: {
     Authorization: `Bearer ${window.sessionStorage.getItem("token")}`
   }
