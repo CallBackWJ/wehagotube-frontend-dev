@@ -4,10 +4,16 @@ import Layout from "../../components/video/liveController/Layout";
 import Stepper from "../../components/video/liveController/Stepper";
 import Desc from "../../components/video/liveController/Desc";
 import Button from "../../components/video/liveController/Button";
-import { CREATE_VIDEO, VIDEO, STREAMING } from "../../graphql/video";
+import {
+  CREATE_VIDEO,
+  VIDEO,
+  STREAMING,
+  DO_PUBLISH,
+  DELETE_VIDEO
+} from "../../graphql/video";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import Loading from "../../components/common/Loading"
+import Loading from "../../components/common/Loading";
 const STEP = [
   { title: "예약", desc: "스트림을 생성하시겠습니까? " },
   { title: "준비", desc: "방송을 시작하시겠습니까?" },
@@ -19,7 +25,6 @@ const STEP = [
 const STATUS = ["RESERVED", "READY", "LIVE", "COMPLETED", "PUBLISHED"];
 
 const LiveController = props => {
-  const [test, setTest] = React.useState(false);
   const [UILoading, setUILoading] = React.useState(false);
 
   const [streaming] = useMutation(STREAMING);
@@ -29,6 +34,24 @@ const LiveController = props => {
         schedule_id: schedule_id,
         youtube_id: youtube_id,
         status: status
+      }
+    });
+
+    const [deleteVideo] = useMutation(DELETE_VIDEO);
+    const deleteVideoBinder = (schedule_id, youtube_id) =>
+    deleteVideo({
+        variables: {
+          schedule_id: schedule_id,
+          youtube_id: youtube_id
+        }
+      });
+
+  const [doPublish] = useMutation(DO_PUBLISH);
+  const doPublishBinder = (id, publish) =>
+    doPublish({
+      variables: {
+        id,
+        publish
       }
     });
 
@@ -50,84 +73,67 @@ const LiveController = props => {
   const HANDLER = [
     async () => {
       setUILoading(true);
-      const result = await createVideoBinder(props.id);
-      await refetch();
+      const {data:{createVideo}} = await createVideoBinder(props.id);
+      createVideo?await refetch():alert("라이브 생성에 실패했습니다.");
       setUILoading(false);
     },
     async () => {
       setUILoading(true);
-      const result = await streamingBinder(
+      const {data:{streaming}} = await streamingBinder(
         props.id,
         data.video.youtubeId,
         "LIVE"
       );
-      if (result) await refetch();
+      streaming?await refetch():alert("스트림이 존재하지 않습니다.");
       setUILoading(false);
     },
     async () => {
       setUILoading(true);
-      const result = await streamingBinder(
+      const {data:{streaming}}  = await streamingBinder(
         props.id,
         data.video.youtubeId,
         "COMPLETED"
       );
-      if (result) await refetch();
+      streaming?await refetch():alert("스트림을 종료 할 수 없습니다.");
       setUILoading(false);
     },
     async () => {
       setUILoading(true);
-      const result = await streamingBinder(
+      const {data:{doPublish}} = await doPublishBinder(
         props.id,
-        data.video.youtubeId,
-        "PUBLISHED"
+        true
       );
-      if (result) await refetch();
+      doPublish?await refetch():alert("공개 불가능");
       setUILoading(false);
     },
     async () => {
       setUILoading(true);
-      const result = await streamingBinder(
+      const {data:{doPublish}}= await doPublishBinder(
         props.id,
-        data.video.youtubeId,
-        "UNPUBLISHED"
+        false
       );
-      if (result) await refetch();
+      doPublish?await refetch():alert("비공개 불가능");
       setUILoading(false);
     },
     async () => {
       setUILoading(true);
-      const result = await streamingBinder(
+      const {data:{deleteVideo}} = await deleteVideoBinder(
         props.id,
         data.video.youtubeId,
-        "TEST"
       );
-      if (result) await setTest(true);
-      setUILoading(false);
-    },
-    async () => {
-      setUILoading(true);
-      const result = await streamingBinder(
-        props.id,
-        data.video.youtubeId,
-        "DELETE"
-      );
-      if (result) await refetch();
+      deleteVideo?await refetch():alert("삭제 실패");
       setUILoading(false);
     }
   ];
 
   const status = data.video ? data.video.schedule.status : "RESERVED";
-  if (UILoading)
-    return (
-      <Loading/>
-    );
+  if (UILoading) return <Loading />;
   return (
     <Layout>
       <Stepper steps={STEP} state={STATUS.indexOf(status)} />
       <Desc steps={STEP} state={STATUS.indexOf(status)} />
       <Button
         steps={STEP}
-        test={test}
         status={STATUS.indexOf(status)}
         handler={HANDLER}
       />

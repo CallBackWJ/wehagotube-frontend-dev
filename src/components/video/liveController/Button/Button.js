@@ -35,19 +35,14 @@ const Button = props => {
     <Root>
       {props.steps.length === props.status + 1 ? (
         <Back onClick={props.handler[props.status]}>배포중지</Back>
-      ) : props.status === 1 ? (
-        <Back onClick={props.handler[5]} disabled={props.test}>
-          테스트
-        </Back>
       ) : (props.status === 3||props.status === 1) ? (
-        <Back onClick={props.handler[6]}>
+        <Back onClick={props.handler[5]}>
           삭제
         </Back>
       ) : null}
       <Next
         disabled={
-          props.steps.length === props.status + 1 ||
-          (props.status === 1 && props.test === false)
+          props.steps.length === props.status + 1
         }
         onClick={props.handler[props.status]}
       >

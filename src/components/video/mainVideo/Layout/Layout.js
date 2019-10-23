@@ -22,7 +22,7 @@ const Layout = props => {
     <Root>
       {props.children}
       <More>
-        <IconButton onClick={()=>props.onClick(props.disabled)}>
+        <IconButton onClick={()=>props.onClick(props.disabled)} disabled={!props.onClick}>
           {props.disabled?<MdKeyboardArrowUp />:<MdKeyboardArrowDown />}
         </IconButton>
       </More>
