@@ -41,16 +41,14 @@ const UserInfo = props => {
  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
-
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const options = ["로그아웃", "관리하기"];
+
   const handleItemClick = item => {
     if (item === "로그아웃") props.logout();
     else if (item === "관리하기") props.manage();
@@ -102,6 +100,11 @@ const UserInfo = props => {
       ) : (
         <GoogleLogin
           clientId="582721858124-msmrbfu9hs073da415js0l60jg5e8ej3.apps.googleusercontent.com"
+          onSuccess={props.login}
+          onFailure={props.login}
+          scope="profile email https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl"
+          accessType="offline"
+          responseType="code"
           render={renderProps => (
             <Login
               onClick={renderProps.onClick}
@@ -110,9 +113,6 @@ const UserInfo = props => {
               구글 로그인
             </Login>
           )}
-          onSuccess={props.login}
-          onFailure={props.login}
-          scope="profile email https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl"
         />
       )}
     </div>

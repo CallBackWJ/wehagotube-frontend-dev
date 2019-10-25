@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useVideoContext } from "../../../contexts/VideoContext";
 import {VIDEO} from "../../../graphql/video";
 import { useQuery } from "react-apollo-hooks";
+
 const GuideMessage = styled.div`
   width: ${props => props.width+"px"};
   height: ${props => props.height+"px"};

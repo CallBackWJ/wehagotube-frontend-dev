@@ -10,19 +10,15 @@ import { useMutation, useQuery } from "react-apollo-hooks";
 import { withRouter } from "react-router-dom";
 
 
-
 const Header = props => {
   const [signUp] = useMutation(SIGN_UP);
-  const signUpBinder = (name, avatar, email, accessToken) =>
+  const signUpBinder = (code) =>
     signUp({
       variables: {
-        name: name,
-        avatar: avatar,
-        email: email,
-        accessToken: accessToken
+        code: code,
       }
     });
-  const { data, loading, refetch } = useQuery(ME, { pollInterval: 20000 });
+  const { data, loading, refetch } = useQuery(ME, { pollInterval: 3590000 });
 
   const homeClick = () => {
     props.history.push("/");
@@ -36,14 +32,10 @@ const Header = props => {
 
   const LoginClick = async response => {
     console.log(response);
-    const token = await signUpBinder(
-      response.profileObj.name,
-      response.profileObj.imageUrl,
-      response.profileObj.email,
-      response.accessToken
-    );
+    
+    const token= await signUpBinder(response.code);
+      console.log("token::",token)
     await window.sessionStorage.setItem("token", token.data.signUp);
-    // await refetch();
     window.location.reload();
   };
   const LogoutClick = async () => {
