@@ -32,15 +32,14 @@ const Header = props => {
 
   const LoginClick = async response => {
     console.log(response);
-    
     const token= await signUpBinder(response.code);
-      console.log("token::",token)
+    console.log("token::",token)
     await window.sessionStorage.setItem("token", token.data.signUp);
     window.location.reload();
   };
   const LogoutClick = async () => {
     await window.sessionStorage.removeItem("token");
-    // await refetch()
+    await refetch()
     window.location.reload();
   };
 

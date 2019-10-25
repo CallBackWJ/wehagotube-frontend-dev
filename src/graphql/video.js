@@ -36,7 +36,7 @@ export const STREAMING = gql`
     $youtube_id: String!
     $status: String!
   ) {
-    streamimg(
+    streaming(
       schedule_id: $schedule_id
       youtube_id: $youtube_id
       status: $status

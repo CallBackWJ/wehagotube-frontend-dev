@@ -47,7 +47,8 @@ const UserInfo = props => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const options = ["로그아웃", "관리하기"];
+  
+  const options = !props.me?[]:props.me.permission==="USER"?["로그아웃"]:["로그아웃", "관리하기"];
 
   const handleItemClick = item => {
     if (item === "로그아웃") props.logout();
