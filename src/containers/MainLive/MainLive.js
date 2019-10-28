@@ -40,14 +40,18 @@ const MainLive = props => {
             liveVideo: []
           };
         }
-
+        console.log("id::", subscriptionData.data.pubsubSchedule.id);
+        console.log("status::", subscriptionData.data.pubsubSchedule.status);
+        
         return {
           liveVideo: [
             {
               schedule: {
                 id: subscriptionData.data.pubsubSchedule.id,
                 status:subscriptionData.data.pubsubSchedule.status,
-              }
+                __typename: "Schedule"
+              },
+              __typename: "Video"
             }
           ]
         };
@@ -57,6 +61,7 @@ const MainLive = props => {
     });
   subscribeToNewComments();
 
+  console.log("data::",data)
   const items = data.liveVideo.map(item => item.schedule.id);
 
   if (items[0]) {
