@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import ScheduleCalendar from "../../components/schedule/ScheduleCalendar";
 import { useMutation, useQuery } from "react-apollo-hooks";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import {
   CREATE_SCHEDULE,
   SCHEDULES,
-  UPDATE_SCHEDULE
+  UPDATE_SCHEDULE,
+  DELETE_SCHEDULE
 } from "../../graphql/schedule";
 import CreateDialog from "../../components/schedule/CreateDialog";
 import UpdateDialog from "../../components/common/dialog/Schedule";
@@ -17,6 +17,7 @@ const Calendar = props => {
   const [updateOpen, setUpdateOpen] = React.useState(false);
   const [scheduleData, setScheduleData] = React.useState({});
   const [createData, setCreateData] = React.useState({});
+  const [APILoading, setAPILoading] = React.useState(false);
 
   const handleUpdateOpen = async e => {
     await setScheduleData(e);
@@ -50,6 +51,14 @@ const Calendar = props => {
       }
     });
 
+  const [deleteSchedule] = useMutation(DELETE_SCHEDULE);
+  const deleteScheduleBinder = id =>
+    deleteSchedule({
+      variables: {
+        id: id
+      }
+    });
+
   const { data, error, loading, refetch } = useQuery(SCHEDULES, {
     variables: {
       type: props.type,
@@ -74,6 +83,7 @@ const Calendar = props => {
     new Date(end).getDate() - new Date(start).getDate();
 
   const handleSave = async (title, desc, start, end) => {
+    setAPILoading(true);
     setCreateOpen(false);
     for (let i = 0, weekendCount = 0; i <= diffDate(start, end); i++) {
       isWeekend(
@@ -95,13 +105,23 @@ const Calendar = props => {
               .format("YYYY[-]MM[-]DDTHH:mm:00+09:00")
           );
     }
-
     refetch();
+    setAPILoading(false);
+  };
+
+  const handleDelete = async id => {
+    setAPILoading(true);
+    const val = await deleteScheduleBinder(id);
+    await refetch();
+    setAPILoading(false);
+    return val.data.deleteSchedule;
   };
 
   const handleUpdate = async (id, title, desc, startTime, endTime, status) => {
+    setAPILoading(true);
     await updateScheduleBinder(id, title, desc, startTime, endTime, status);
     await refetch();
+    setAPILoading(false);
   };
 
   const setTime = ({ start, end }) => {
@@ -112,27 +132,36 @@ const Calendar = props => {
   const handleSelectSlot = event =>
     isWeekend(new Date(event.start)) || isWeekend(new Date(event.end))
       ? alert("주말에는 스케줄을 생성할수 없습니다.")
+      : diffDate(new Date(), new Date(event.start)) < 0
+      ? alert("이전 날짜에 스케줄을 설정 할 수 없습니다.")
       : setTime(event);
 
   return (
     <>
-      <CreateDialog
-        open={createOpen}
-        onClose={() => setCreateOpen(false)}
-        onCreate={handleSave}
-        data={createData}
-      />
-      <UpdateDialog
-        open={updateOpen}
-        onClose={handleUpdateClose}
-        onUpdate={handleUpdate}
-        data={scheduleData}
-      />
-      <ScheduleCalendar
-        items={items}
-        onSelectSlot={handleSelectSlot}
-        onSelectEvent={handleUpdateOpen}
-      />
+      {APILoading ? (
+        <Loading />
+      ) : (
+        <>
+          <CreateDialog
+            open={createOpen}
+            onClose={() => setCreateOpen(false)}
+            onCreate={handleSave}
+            data={createData}
+          />
+          <UpdateDialog
+            open={updateOpen}
+            onClose={handleUpdateClose}
+            onUpdate={handleUpdate}
+            onDelete={handleDelete}
+            data={scheduleData}
+          />
+          <ScheduleCalendar
+            items={items}
+            onSelectSlot={handleSelectSlot}
+            onSelectEvent={handleUpdateOpen}
+          />
+        </>
+      )}
     </>
   );
 };

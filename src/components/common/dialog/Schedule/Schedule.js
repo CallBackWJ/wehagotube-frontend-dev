@@ -91,6 +91,16 @@ export default function CustomizedDialogs(props) {
     setUpdatable(true);
   };
 
+  const handleDelete=async()=>{
+    const val= await props.onDelete(props.data.id);
+    if(val){
+      props.onClose()
+    }else{
+      alert("삭제 실패")
+    }
+
+    
+  }
   const valuetext = value => {
     console.log(value);
     setHour(value);
@@ -212,7 +222,7 @@ export default function CustomizedDialogs(props) {
           </Button>
         )}
 
-        <Button onClick={props.onClose} color="primary" disabled={!updatable}>
+        <Button onClick={handleDelete} color="primary" disabled={!updatable}>
           삭제
         </Button>
       </DialogActions>

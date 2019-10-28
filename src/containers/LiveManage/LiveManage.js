@@ -11,11 +11,11 @@ const LiveManage = props => {
     return (
         <Layout>
            <Controller id={props.id}/>
-           <Youtube id={props.id} width="534" height="300" />
+           <Youtube id={props.id} width="534" height="300" watchable/>
            <Info id={props.id}/>
            <Box title={["실시간 채팅","타임 링크"]}>
             <LiveChat id={props.id}/>
-            <TimeLink id={props.id}/>
+            <TimeLink id={props.id} writable/>
            </Box>
         </Layout>
     );

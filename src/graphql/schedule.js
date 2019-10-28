@@ -49,6 +49,11 @@ export const CREATE_SCHEDULE = gql`
     }
   }
 `;
+export const DELETE_SCHEDULE = gql`
+  mutation deleteSchedule($id: String!) {
+    deleteSchedule(id: $id)
+  }
+`;
 
 export const LATEST_SCHEDULE_LIST = gql`
   query latestScheduleList($page: Int!) {

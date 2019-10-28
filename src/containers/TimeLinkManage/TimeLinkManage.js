@@ -71,7 +71,7 @@ const TimeLinkManage = props => {
   return (
     <Layout>
       {items}
-      <Form seek={seek} onClick={handleCreate} disabled={disabled} />
+      {props.writable?(<Form seek={seek} onClick={handleCreate} disabled={disabled} />):null}
     </Layout>
   );
 };

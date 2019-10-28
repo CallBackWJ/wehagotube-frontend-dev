@@ -16,8 +16,6 @@ const GuideMessage = styled.div`
 `;
 
 const Youtube = props => {
-
-
   const opts = {
     height: props.height,
     width: props.width,
@@ -51,13 +49,15 @@ const Youtube = props => {
   const videoId=(data.video)?data.video.youtubeId:"Z9_-4d3LDw0";
 
 
-  if (status === "LIVE" || status === "PUBLISHED")
+  if (status === "LIVE" || status === "PUBLISHED"||(props.watchable&&status === "COMPLETED"))
     return (
       <YouTube
         videoId={videoId}
         opts={opts}
         onReady={onReady}
         onStateChange={onStateChange}
+        showRelatedVideos={false}
+        showInfo={false}
       />
     );
   else return <GuideMessage width={props.width} height={props.height}>{status}</GuideMessage>;
