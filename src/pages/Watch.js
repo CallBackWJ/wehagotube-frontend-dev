@@ -8,9 +8,20 @@ import Info from "../containers/VideoInfo";
 import Box from "../components/ChatAndLinkBox";
 import TimeLink from "../containers/TimeLinkManage";
 import LiveChat from "../components/video/LiveChat"
-
+import { useSubscription } from "react-apollo-hooks";
+import { PUBSUB_SCHEDULE } from "../graphql/schedule";
 const WatchPage = ({ match }) => {
   const { id } = match.params;
+  const {data,error,loading}=useSubscription(PUBSUB_SCHEDULE);
+  if(!loading){
+    if(data.pubsubSchedule){
+      if(data.pubsubSchedule.id===id){
+        console.log("data::",data);
+        window.location.reload();
+      }
+    }
+   
+  }
   return (
     <CommonLayout>
       <Header />

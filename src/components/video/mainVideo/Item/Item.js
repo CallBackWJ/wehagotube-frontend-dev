@@ -65,7 +65,7 @@ const LookupCounter = styled.div`
 
 const Item = props => {
   const handleClick = () => {
-
+    if(props.id)
     props.history.push(`/watch/${props.id}`);
   };
   return (

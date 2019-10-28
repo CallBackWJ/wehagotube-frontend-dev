@@ -9,20 +9,6 @@ import { PUBSUB_SCHEDULE } from "../../graphql/schedule";
 import { useQuery } from "react-apollo";
 
 const MainLive = props => {
-  //   const { data, error, loading } = useSubscription(PUBSUB_SCHEDULE);
-  //   if (loading) return ""
-  //   if (error) return "error"
-  //   const id=data.pubsubSchedule&&data.pubsubSchedule.id;
-  //   if(id){
-  //       return (
-  //           <Live id={id}>
-  //              <Youtube id={id} width="240" height="135" />
-  //              <Info id={id}/>
-  //           </Live>
-  //       );
-  //   }else{
-  //       return null;
-  //   }
 
   const { data, error, loading, subscribeToMore } = useQuery(LIVE_VIDEO);
   if (loading) return "";
