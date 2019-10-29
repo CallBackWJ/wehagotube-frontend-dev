@@ -24,7 +24,9 @@ const Root = styled.div`
     .back {
       display: flex;
       justify-content: center;
+      font-size:0.8rem;
       align-items: center;
+      padding:1.5rem;
       overflow:auto;
     }
   }

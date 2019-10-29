@@ -9,6 +9,13 @@ const Root = styled.div`
   margin-top: 1rem;
   margin-right: 1rem;
   padding: 1rem;
+  border-radius:5px;
+  border:1px solid #F0F0F0;
+  box-shadow: 0 1px 2px rgba(0, 5, 9, 0.1);
+  &:hover{
+    border:1px solid rgb(0, 144, 245);
+  }
+  cursor:pointer;
 `;
 const VideoImg = styled.img`
   background-size: cover;

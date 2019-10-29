@@ -129,10 +129,11 @@ const Calendar = props => {
     setCreateOpen(true);
   };
 
+  
   const handleSelectSlot = event =>
     isWeekend(new Date(event.start)) || isWeekend(new Date(event.end))
       ? alert("주말에는 스케줄을 생성할수 없습니다.")
-      : diffDate(new Date(), new Date(event.start)) < 0
+      : new Date().getTime()-new Date(event.start).getTime() > 0
       ? alert("이전 날짜에 스케줄을 설정 할 수 없습니다.")
       : setTime(event);
 
