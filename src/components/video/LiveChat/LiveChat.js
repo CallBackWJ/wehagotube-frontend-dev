@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { VIDEO } from '../../../graphql/video';
 import { useQuery } from 'react-apollo-hooks';
 const LiveChat = props => {
-  const { data, error, loading, refetch } = useQuery(VIDEO, {
+  const { data, error, loading } = useQuery(VIDEO, {
     variables: { schedule_id: props.id }
   });
 
